@@ -33,6 +33,7 @@ class ServiceModel(db.Model):
         return ServiceModel.query.all()
     @staticmethod
     def get_one_service():
-        return ServiceModel.query.get(id)
+        print("get one service")
+        return ServiceModel.query.get(1)
     def __repr__(self):
         return "<id {}>".format(self.id)
