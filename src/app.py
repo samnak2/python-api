@@ -1,14 +1,21 @@
 from flask import Flask
+from flask_cors import CORS, cross_origin
 from .config import app_config
 from .models import db
+from .views.ServiceView import service_api as service_blueprint
 import psycopg2
 def create_app(env_name):
     # Create app
     # app initialization
     app = Flask(__name__)
+    # CORS(app, origins=["https://web.postman.co"])
+    # CORS(app)
     app.config.from_object(app_config[env_name])
     db.init_app(app)
+    app.register_blueprint(service_blueprint, url_prefix="/api/v1/services")
     @app.route("/", methods=["GET"])
+    # @cross_origin(origins=["https://web.postman.co"])
+    # @cross_origin()
     def index():
         # example endpoint
         # establishing the connection
